@@ -118,9 +118,12 @@ public:
 
     // Information from most recent processed frame
     // You can call this right after TrackMonocular (or stereo or RGBD)
+    std::vector<Eigen::Matrix4f> GetTrajectory();
     int GetTrackingState();
     std::vector<MapPoint*> GetTrackedMapPoints();
     std::vector<cv::KeyPoint> GetTrackedKeyPointsUn();
+    int GetNumTrackedMapPoints();
+    int GetNumTrackedKeyPoints();
 
 private:
 

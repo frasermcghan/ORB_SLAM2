@@ -24,7 +24,9 @@
 
 #include<string>
 #include<thread>
+#include <Eigen/Dense>
 #include<opencv2/core/core.hpp>
+#include<opencv2/core/eigen.hpp>
 
 #include "Tracking.h"
 #include "FrameDrawer.h"
@@ -71,6 +73,10 @@ public:
     // Input depthmap: Float (CV_32F).
     // Returns the camera pose (empty if tracking fails).
     cv::Mat TrackRGBD(const cv::Mat &im, const cv::Mat &depthmap, const double &timestamp);
+    Eigen::Matrix4f TrackRGBD_Eigen(
+        const Eigen::Matrix<uint8_t, Eigen::Dynamic, Eigen::Dynamic> &im,
+        const Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic> &depthmap,
+        const double &timestamp);
 
     // Proccess the given monocular frame
     // Input images: RGB (CV_8UC3) or grayscale (CV_8U). RGB is converted to grayscale.

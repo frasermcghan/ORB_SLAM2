@@ -81,6 +81,7 @@ ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
 
 add_subdirectory(pybind11)
 pybind11_add_module(orbslam2 bindings.cpp)
+target_link_libraries(orbslam2 PRIVATE ${PROJECT_NAME})
 
 # Build examples
 

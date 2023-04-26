@@ -69,6 +69,9 @@ public:
 protected:
     std::set<MapPoint*> mspMapPoints;
     std::set<KeyFrame*> mspKeyFrames;
+    
+    std::set<MapPoint*> ErasedMapPoints;
+    std::set<KeyFrame*> ErasedKeyFrames;
 
     std::vector<MapPoint*> mvpReferenceMapPoints;
 

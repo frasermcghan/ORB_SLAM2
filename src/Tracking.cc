@@ -541,7 +541,6 @@ void Tracking::StereoInitialization()
 
         mpLocalMapper->InsertKeyFrame(pKFini);
 
-        mLastFrame = Frame(mCurrentFrame);
         mnLastKeyFrameId=mCurrentFrame.mnId;
         mpLastKeyFrame = pKFini;
 
@@ -549,6 +548,8 @@ void Tracking::StereoInitialization()
         mvpLocalMapPoints=mpMap->GetAllMapPoints();
         mpReferenceKF = pKFini;
         mCurrentFrame.mpReferenceKF = pKFini;
+
+        mLastFrame = Frame(mCurrentFrame);
 
         mpMap->SetReferenceMapPoints(mvpLocalMapPoints);
 

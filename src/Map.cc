@@ -50,6 +50,7 @@ void Map::EraseMapPoint(MapPoint *pMP)
 
     // TODO: This only erase the pointer.
     // Delete the MapPoint
+    ErasedMapPoints.insert(pMP);
 }
 
 void Map::EraseKeyFrame(KeyFrame *pKF)
@@ -59,6 +60,7 @@ void Map::EraseKeyFrame(KeyFrame *pKF)
 
     // TODO: This only erase the pointer.
     // Delete the MapPoint
+    ErasedKeyFrames.insert(pKF);
 }
 
 void Map::SetReferenceMapPoints(const vector<MapPoint *> &vpMPs)
@@ -123,6 +125,14 @@ void Map::clear()
     for(set<KeyFrame*>::iterator sit=mspKeyFrames.begin(), send=mspKeyFrames.end(); sit!=send; sit++)
         delete *sit;
 
+    for(set<MapPoint*>::iterator sit=ErasedMapPoints.begin(), send=ErasedMapPoints.end(); sit!=send; sit++)
+        delete *sit;
+
+    for(set<KeyFrame*>::iterator sit=ErasedKeyFrames.begin(), send=ErasedKeyFrames.end(); sit!=send; sit++)
+        delete *sit;
+
+    ErasedMapPoints.clear();
+    ErasedKeyFrames.clear();
     mspMapPoints.clear();
     mspKeyFrames.clear();
     mnMaxKFid = 0;

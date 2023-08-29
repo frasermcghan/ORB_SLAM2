@@ -212,7 +212,7 @@ cv::Mat System::TrackRGBD(const cv::Mat &im, const cv::Mat &depthmap, const doub
     mTrackingState = mpTracker->mState;
     mTrackedMapPoints = mpTracker->mCurrentFrame.mvpMapPoints;
     mTrackedKeyPointsUn = mpTracker->mCurrentFrame.mvKeysUn;
-    return Tcw.inv();
+    return Tcw;
 }
 
 Eigen::Matrix4f System::TrackRGBD_Eigen(
@@ -229,7 +229,7 @@ Eigen::Matrix4f System::TrackRGBD_Eigen(
   }
   Eigen::Matrix4f Tcw_eigen;
   cv::cv2eigen(Tcw, Tcw_eigen);
-  return Tcw_eigen;
+  return Tcw_eigen.inverse();
 }
 
 cv::Mat System::TrackMonocular(const cv::Mat &im, const double &timestamp)

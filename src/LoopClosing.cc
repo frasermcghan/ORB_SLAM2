@@ -60,6 +60,8 @@ void LoopClosing::Run()
 
     while(1)
     {
+        ResetIfRequested();
+
         // Check if there are keyframes in the queue
         if(CheckNewKeyFrames())
         {
@@ -76,7 +78,6 @@ void LoopClosing::Run()
             }
         }       
 
-        ResetIfRequested();
 
         if(CheckFinish())
             break;

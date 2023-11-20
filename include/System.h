@@ -135,6 +135,11 @@ public:
     std::vector<Eigen::Vector3f> GetMapPointsPositions();
     std::vector<Eigen::Vector3f> GetTrackedMapPointsPositions();
 
+    std::vector<MapPoint*> GetUnTrackedMapPoints();
+    std::vector<Eigen::Vector3f> GetUnTrackedMapPointsPositions();
+    int GetNumUnTrackedMapPoints();
+    int GetNumKeyFrames();
+
 private:
 
     // Input sensor

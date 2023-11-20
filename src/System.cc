@@ -599,4 +599,52 @@ vector<Eigen::Vector3f> System::GetTrackedMapPointsPositions()
     }
     return positions;
 }
+
+vector<MapPoint*> System::GetUnTrackedMapPoints()
+{
+    vector<MapPoint*> all_points = mpMap->GetAllMapPoints();
+    vector<MapPoint*> tracked_points = GetTrackedMapPoints();
+
+    vector<int> all_ids;
+    for (auto p : all_points){
+        all_ids.push_back(p->mnId);
+    }
+
+    vector<int> tracked_ids;
+    for (auto tp : tracked_points){
+        tracked_ids.push_back(tp->mnId);
+    }
+
+    vector<MapPoint*> untracked_points;
+    for (int i = 0; i != all_ids.size(); ++i){
+        if (find(tracked_ids.begin(), tracked_ids.end(), all_ids[i]) == tracked_ids.end()){
+            untracked_points.push_back(all_points[i]);
+        }
+    }
+    return untracked_points;
+}
+
+vector<Eigen::Vector3f> System::GetUnTrackedMapPointsPositions()
+{
+    vector<MapPoint*> points = GetUnTrackedMapPoints();
+    vector<Eigen::Vector3f> positions;
+    for (MapPoint* p : points){
+        Eigen::Vector3f pos_eigen;
+        cv::Mat pos = p->GetWorldPos();
+        cv::cv2eigen(pos, pos_eigen);
+        positions.push_back(pos_eigen);
+    }
+    return positions;
+}
+
+int System::GetNumUnTrackedMapPoints()
+{
+    return GetUnTrackedMapPoints().size();
+}
+
+int System::GetNumKeyFrames()
+{;
+    return mpMap->GetAllKeyFrames().size();
+}
+
 } //namespace ORB_SLAM

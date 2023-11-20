@@ -19,6 +19,9 @@ PYBIND11_MODULE(orbslam2, m) {
   system.def("GetNumMapPoints", &ORB_SLAM2::System::GetNumMapPoints);
   system.def("GetMapPointsPositions", &ORB_SLAM2::System::GetMapPointsPositions);
   system.def("GetNumTrackedKeyPoints", &ORB_SLAM2::System::GetNumTrackedKeyPoints);
+  system.def("GetUnTrackedMapPointsPositions", &ORB_SLAM2::System::GetUnTrackedMapPointsPositions);
+  system.def("GetNumUnTrackedMapPoints", &ORB_SLAM2::System::GetNumUnTrackedMapPoints);
+  system.def("GetNumKeyFrames", &ORB_SLAM2::System::GetNumKeyFrames);
   system.def("Reset", &ORB_SLAM2::System::Reset);
 
   py::enum_<ORB_SLAM2::System::eSensor>(system, "SensorType")

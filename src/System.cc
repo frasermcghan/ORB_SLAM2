@@ -544,7 +544,13 @@ int System::GetTrackingState()
 vector<MapPoint*> System::GetTrackedMapPoints()
 {
     unique_lock<mutex> lock(mMutexState);
-    return mTrackedMapPoints;
+    vector<MapPoint*> filtered_points;
+    for (MapPoint* p : mTrackedMapPoints){
+        if (p != NULL){
+            filtered_points.push_back(p);
+        }
+    }
+    return filtered_points;
 }
 
 vector<cv::KeyPoint> System::GetTrackedKeyPointsUn()
@@ -563,4 +569,34 @@ int System::GetNumTrackedKeyPoints()
     return GetTrackedKeyPointsUn().size();
 }
 
+int System::GetNumMapPoints()
+{
+    return mpMap->MapPointsInMap();
+}
+
+vector<Eigen::Vector3f> System::GetMapPointsPositions()
+{
+    vector<MapPoint*> points = mpMap->GetAllMapPoints();
+    vector<Eigen::Vector3f> positions;
+    for (MapPoint* p : points){
+        Eigen::Vector3f pos_eigen;
+        cv::Mat pos = p->GetWorldPos();
+        cv::cv2eigen(pos, pos_eigen);
+        positions.push_back(pos_eigen);
+    }
+    return positions;
+}
+
+vector<Eigen::Vector3f> System::GetTrackedMapPointsPositions()
+{
+    vector<MapPoint*> points = GetTrackedMapPoints();
+    vector<Eigen::Vector3f> positions;
+    for (MapPoint* p : points){
+        Eigen::Vector3f pos_eigen;
+        cv::Mat pos = p->GetWorldPos();
+        cv::cv2eigen(pos, pos_eigen);
+        positions.push_back(pos_eigen);
+    }
+    return positions;
+}
 } //namespace ORB_SLAM

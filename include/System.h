@@ -131,6 +131,10 @@ public:
     int GetNumTrackedMapPoints();
     int GetNumTrackedKeyPoints();
 
+    int GetNumMapPoints();
+    std::vector<Eigen::Vector3f> GetMapPointsPositions();
+    std::vector<Eigen::Vector3f> GetTrackedMapPointsPositions();
+
 private:
 
     // Input sensor

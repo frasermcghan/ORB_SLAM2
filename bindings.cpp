@@ -15,6 +15,9 @@ PYBIND11_MODULE(orbslam2, m) {
   system.def("GetTrajectory", &ORB_SLAM2::System::GetTrajectory);
   system.def("GetTrackingState", &ORB_SLAM2::System::GetTrackingState);
   system.def("GetNumTrackedMapPoints", &ORB_SLAM2::System::GetNumTrackedMapPoints);
+  system.def("GetTrackedMapPointsPositions", &ORB_SLAM2::System::GetTrackedMapPointsPositions);
+  system.def("GetNumMapPoints", &ORB_SLAM2::System::GetNumMapPoints);
+  system.def("GetMapPointsPositions", &ORB_SLAM2::System::GetMapPointsPositions);
   system.def("GetNumTrackedKeyPoints", &ORB_SLAM2::System::GetNumTrackedKeyPoints);
   system.def("Reset", &ORB_SLAM2::System::Reset);
 

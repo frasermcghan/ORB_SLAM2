@@ -23,6 +23,7 @@ PYBIND11_MODULE(orbslam2, m) {
   system.def("GetNumUnTrackedMapPoints", &ORB_SLAM2::System::GetNumUnTrackedMapPoints);
   system.def("GetNumKeyFrames", &ORB_SLAM2::System::GetNumKeyFrames);
   system.def("Reset", &ORB_SLAM2::System::Reset);
+  system.def("MapChanged", &ORB_SLAM2::System::MapChanged);
 
   py::enum_<ORB_SLAM2::System::eSensor>(system, "SensorType")
       .value("MONOCULAR", ORB_SLAM2::System::eSensor::MONOCULAR)
